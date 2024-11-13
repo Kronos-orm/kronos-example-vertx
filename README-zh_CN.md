@@ -14,8 +14,8 @@
 
 ```kts
 dependencies {
-    implementation("com.kotlinorm:kronos-core:0.1.0-SNAPSHOT")
-    implementation("com.kotlinorm:kronos-jdbc-wrapper:0.1.0-SNAPSHOT")
+  implementation("com.kotlinorm:kronos-core:0.1.0-SNAPSHOT")
+  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.1.0-SNAPSHOT")
 }
 ```
 
@@ -23,7 +23,7 @@ dependencies {
 
 ```kts
 plugins {
-    id("com.kotlinorm.kronos-gradle-plugin") version "0.1.0"
+  id("com.kotlinorm.kronos-gradle-plugin") version "0.1.0"
 }
 ```
 
@@ -36,14 +36,14 @@ import com.kotlinorm.Kronos
 import com.kotlinorm.KronosBasicWrapper
 
 val ds = BasicDataSource().apply {
-    url = "jdbc:mysql://localhost:3306/kotlinorm"
-    username = "root"
-    password = "**********"
+  url = "jdbc:mysql://localhost:3306/kotlinorm"
+  username = "root"
+  password = "**********"
 }
 
 fun main(args: Array<String>) {
-    io.ktor.server.netty.EngineMain.main(args)
-    Kronos.dataSource = { KronosBasicWrapper(ds) }
+  io.ktor.server.netty.EngineMain.main(args)
+  Kronos.dataSource = { KronosBasicWrapper(ds) }
 }
 ```
 
@@ -58,3 +58,40 @@ http://localhost:8888
 如果接口返回的结果如下图所示，则表示Kronos已成功运行，编译器插件也已正常工作。
 
 ![screen](https://github.com/Kronos-orm/kronos-example-vertx/blob/main/screenshot/img.png?raw=true)
+
+----
+
+Kronos-example-vertx
+
+image:https://img.shields.io/badge/vert.x-4.5.10-purple.svg[link="https://vertx.io"]
+
+This application was generated using http://start.vertx.io
+
+== Building
+
+To launch your tests:
+
+```
+./gradlew clean test
+```
+
+To package your application:
+
+```
+./gradlew clean assemble
+```
+
+To run your application:
+
+```
+./gradlew clean run
+```
+
+== Help
+
+* https://vertx.io/docs/[Vert.x Documentation]
+* https://stackoverflow.com/questions/tagged/vert.x?sort=newest&pageSize=15[Vert.x Stack Overflow]
+* https://groups.google.com/forum/?fromgroups#!forum/vertx[Vert.x User Group]
+* https://discord.gg/6ry7aqPWXy[Vert.x Discord]
+
+
