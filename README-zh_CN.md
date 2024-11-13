@@ -35,15 +35,35 @@ plugins {
 import com.kotlinorm.Kronos
 import com.kotlinorm.KronosBasicWrapper
 
-val ds = BasicDataSource().apply {
-  url = "jdbc:mysql://localhost:3306/kotlinorm"
-  username = "root"
-  password = "**********"
-}
+class MainVerticle : AbstractVerticle() {
+  private val ds = BasicDataSource().apply {
+    url = "jdbc:mysql://localhost:3306/kotlinorm"
+    username = "root"
+    password = "**********"
+  }
 
-fun main(args: Array<String>) {
-  io.ktor.server.netty.EngineMain.main(args)
-  Kronos.dataSource = { KronosBasicWrapper(ds) }
+  override fun start(startPromise: Promise<Void>) {
+    Kronos.apply {
+      dataSource = { KronosBasicWrapper(ds) }
+      fieldNamingStrategy = LineHumpNamingStrategy
+      tableNamingStrategy = LineHumpNamingStrategy
+    }
+    vertx
+      .createHttpServer()
+      .requestHandler { req ->
+        req.response()
+          .putHeader("content-type", "text/plain")
+          .end("Hello from Vert.x!")
+      }
+      .listen(8888) { http ->
+        if (http.succeeded()) {
+          startPromise.complete()
+          println("HTTP server started on port 8888")
+        } else {
+          startPromise.fail(http.cause())
+        }
+      }
+  }
 }
 ```
 
