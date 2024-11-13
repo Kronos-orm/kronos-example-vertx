@@ -61,9 +61,9 @@ http://localhost:8888
 
 ----
 
-Kronos-example-vertx
+# Kronos-example-vertx
 
-image:https://img.shields.io/badge/vert.x-4.5.10-purple.svg[link="https://vertx.io"]
+![https://vertx.io](https://img.shields.io/badge/vert.x-4.5.10-purple.svg)
 
 This application was generated using http://start.vertx.io
 
@@ -87,7 +87,7 @@ To run your application:
 ./gradlew clean run
 ```
 
-== Help
+## Help
 
 * https://vertx.io/docs/[Vert.x Documentation]
 * https://stackoverflow.com/questions/tagged/vert.x?sort=newest&pageSize=15[Vert.x Stack Overflow]
