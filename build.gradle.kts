@@ -1,13 +1,13 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-  kotlin ("jvm") version "2.0.0"
+  kotlin ("jvm") version "2.4.0"
   application
-  id("com.github.johnrengelman.shadow") version "7.1.2"
-  kotlin("plugin.serialization") version "2.0.0"
-  id("com.kotlinorm.kronos-gradle-plugin") version "0.1.0-SNAPSHOT"
+  id("com.github.johnrengelman.shadow") version "8.1.1"
+  kotlin("plugin.serialization") version "2.4.0"
+  id("com.kotlinorm.kronos-gradle-plugin") version "0.2.3"
 }
 
 group = "com.kotlinorm.example.vertx"
@@ -40,17 +40,17 @@ dependencies {
   implementation("io.vertx:vertx-lang-kotlin")
   implementation("io.netty:netty-resolver-dns-native-macos")
   implementation(kotlin("stdlib-jdk8"))
-  implementation("com.kotlinorm:kronos-core:0.1.0-SNAPSHOT")
-  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.1.0-SNAPSHOT")
+  implementation("com.kotlinorm:kronos-core:0.2.3")
+  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.2.3")
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
 
-val compileKotlin: KotlinCompile by tasks
-
-compileKotlin.kotlinOptions {
-  jvmTarget = "17"
-  freeCompilerArgs = listOf("-Xjsr305=strict")
+kotlin {
+  compilerOptions {
+    jvmTarget.set(JvmTarget.JVM_17)
+    freeCompilerArgs.add("-Xjsr305=strict")
+  }
 }
 
 java {

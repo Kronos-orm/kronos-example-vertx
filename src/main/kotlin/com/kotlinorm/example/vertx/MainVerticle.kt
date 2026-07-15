@@ -1,9 +1,9 @@
 package com.kotlinorm.example.vertx
 
 import com.kotlinorm.Kronos
-import com.kotlinorm.KronosBasicWrapper
 import com.kotlinorm.beans.config.LineHumpNamingStrategy
 import com.kotlinorm.example.vertx.pojos.User
+import com.kotlinorm.wrappers.KronosJdbcWrapper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import io.vertx.core.AbstractVerticle
@@ -20,9 +20,9 @@ class MainVerticle : AbstractVerticle() {
   @OptIn(ExperimentalStdlibApi::class)
   override fun start(startPromise: Promise<Void>) {
     Kronos.apply {
-      dataSource = { KronosBasicWrapper(ds) }
-      fieldNamingStrategy = LineHumpNamingStrategy
-      tableNamingStrategy = LineHumpNamingStrategy
+      dataSource = { KronosJdbcWrapper(ds) }
+      fieldNamingStrategy = LineHumpNamingStrategy()
+      tableNamingStrategy = LineHumpNamingStrategy()
     }
     vertx
       .createHttpServer()
@@ -35,8 +35,8 @@ class MainVerticle : AbstractVerticle() {
                 .adapter<Map<String, Any>>()
                 .toJson(mapOf(
                   "application" to "Vert.x + Kronos ORM",
-                  "tableName" to user.kronosTableName(),
-                  "columns" to user.kronosColumns().map {
+                  "tableName" to user.__tableName,
+                  "columns" to user.__columns.map {
                     mapOf(
                       "name" to it.name,
                       "type" to it.type,

@@ -4,7 +4,7 @@
 
 English | [简体中文](https://github.com/Kronos-orm/kronos-example-vertx/blob/main/README-zh_CN.md)
 
-This is a sample project based on Vert.x + Kronos ORM + JDK 17 + Gradle + Kotlin 2.0.0(2.0.20 is about to be adapted.)
+This is a sample project based on Vert.x + Kronos ORM 0.2.3 + JDK 17 + Gradle + Kotlin 2.4.0.
 
 If you would like to learn more about Kronos, please visit [Kronos](https://www.kotlinorm.com/).
 
@@ -14,8 +14,8 @@ If you would like to learn more about Kronos, please visit [Kronos](https://www.
 
 ```kts
 dependencies {
-  implementation("com.kotlinorm:kronos-core:0.1.0-SNAPSHOT")
-  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.1.0-SNAPSHOT")
+  implementation("com.kotlinorm:kronos-core:0.2.3")
+  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.2.3")
 }
 ```
 
@@ -23,7 +23,7 @@ dependencies {
 
 ```kts
 plugins {
-  id("com.kotlinorm.kronos-gradle-plugin") version "0.1.0"
+  id("com.kotlinorm.kronos-gradle-plugin") version "0.2.3"
 }
 ```
 
@@ -34,7 +34,8 @@ You can also replace it with another wrapper or customize the wrapper.
 
 ```kotlin
 import com.kotlinorm.Kronos
-import com.kotlinorm.KronosBasicWrapper
+import com.kotlinorm.beans.config.LineHumpNamingStrategy
+import com.kotlinorm.wrappers.KronosJdbcWrapper
 
 class MainVerticle : AbstractVerticle() {
   private val ds = BasicDataSource().apply {
@@ -45,9 +46,9 @@ class MainVerticle : AbstractVerticle() {
 
   override fun start(startPromise: Promise<Void>) {
     Kronos.apply {
-      dataSource = { KronosBasicWrapper(ds) }
-      fieldNamingStrategy = LineHumpNamingStrategy
-      tableNamingStrategy = LineHumpNamingStrategy
+      dataSource = { KronosJdbcWrapper(ds) }
+      fieldNamingStrategy = LineHumpNamingStrategy()
+      tableNamingStrategy = LineHumpNamingStrategy()
     }
     vertx
       .createHttpServer()
