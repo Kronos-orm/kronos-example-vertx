@@ -4,7 +4,7 @@
 
 [English](https://github.com/Kronos-orm/kronos-example-vertx/blob/main/README.md) | 简体中文
 
-这是一个基于 Vert.x + Kronos ORM 0.2.3 + JDK 17 + Gradle + Kotlin 2.4.0 的示例项目。
+这是一个基于 Vert.x + Kronos ORM 0.4.0 + JDK 17 + Gradle + Kotlin 2.4.21 的示例项目。
 
 如果您想了解更多关于Kronos的信息，请访问[Kronos](https://www.kotlinorm.com/)。
 
@@ -14,8 +14,8 @@
 
 ```kts
 dependencies {
-  implementation("com.kotlinorm:kronos-core:0.2.3")
-  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.2.3")
+  implementation("com.kotlinorm:kronos-core:0.4.0")
+  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.4.0")
 }
 ```
 
@@ -23,7 +23,7 @@ dependencies {
 
 ```kts
 plugins {
-  id("com.kotlinorm.kronos-gradle-plugin") version "0.2.3"
+  id("com.kotlinorm.kronos-gradle-plugin") version "0.4.0"
 }
 ```
 
@@ -114,3 +114,12 @@ To run your application:
 - [Vert.x Stack Overflow](https://stackoverflow.com/questions/tagged/vert.x?sort=newest&pageSize=15)
 - [Vert.x User Group](https://groups.google.com/forum/?fromgroups#!forum/vertx)
 - [Vert.x Discord](https://discord.gg/6ry7aqPWXy)
+
+## 日志
+
+Kronos 默认输出到控制台。通过统一开关关闭日志；重新开启时保留日志类型、路径和自定义工厂：
+
+```kotlin
+Kronos.logging.enabled = false
+Kronos.logging.enabled = true
+```

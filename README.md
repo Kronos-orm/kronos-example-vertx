@@ -4,7 +4,7 @@
 
 English | [简体中文](https://github.com/Kronos-orm/kronos-example-vertx/blob/main/README-zh_CN.md)
 
-This is a sample project based on Vert.x + Kronos ORM 0.2.3 + JDK 17 + Gradle + Kotlin 2.4.0.
+This is a sample project based on Vert.x + Kronos ORM 0.4.0 + JDK 17 + Gradle + Kotlin 2.4.21.
 
 If you would like to learn more about Kronos, please visit [Kronos](https://www.kotlinorm.com/).
 
@@ -14,8 +14,8 @@ If you would like to learn more about Kronos, please visit [Kronos](https://www.
 
 ```kts
 dependencies {
-  implementation("com.kotlinorm:kronos-core:0.2.3")
-  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.2.3")
+  implementation("com.kotlinorm:kronos-core:0.4.0")
+  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.4.0")
 }
 ```
 
@@ -23,7 +23,7 @@ dependencies {
 
 ```kts
 plugins {
-  id("com.kotlinorm.kronos-gradle-plugin") version "0.2.3"
+  id("com.kotlinorm.kronos-gradle-plugin") version "0.4.0"
 }
 ```
 
@@ -118,3 +118,12 @@ To run your application:
 - [Vert.x Discord](https://discord.gg/6ry7aqPWXy)
 
 
+
+## Logging
+
+Kronos logs to the console by default. Disable logging with the shared switch; re-enabling preserves the adapter, paths and custom factory:
+
+```kotlin
+Kronos.logging.enabled = false
+Kronos.logging.enabled = true
+```

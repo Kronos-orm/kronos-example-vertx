@@ -3,11 +3,11 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-  kotlin ("jvm") version "2.4.0"
+  kotlin ("jvm") version "2.4.21"
   application
   id("com.github.johnrengelman.shadow") version "8.1.1"
-  kotlin("plugin.serialization") version "2.4.0"
-  id("com.kotlinorm.kronos-gradle-plugin") version "0.2.3"
+  kotlin("plugin.serialization") version "2.4.21"
+  id("com.kotlinorm.kronos-gradle-plugin") version "0.4.0"
 }
 
 group = "com.kotlinorm.example.vertx"
@@ -40,8 +40,8 @@ dependencies {
   implementation("io.vertx:vertx-lang-kotlin")
   implementation("io.netty:netty-resolver-dns-native-macos")
   implementation(kotlin("stdlib-jdk8"))
-  implementation("com.kotlinorm:kronos-core:0.2.3")
-  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.2.3")
+  implementation("com.kotlinorm:kronos-core:0.4.0")
+  implementation("com.kotlinorm:kronos-jdbc-wrapper:0.4.0")
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
@@ -49,7 +49,7 @@ dependencies {
 kotlin {
   compilerOptions {
     jvmTarget.set(JvmTarget.JVM_17)
-    freeCompilerArgs.add("-Xjsr305=strict")
+    freeCompilerArgs.addAll("-Xjsr305=strict", "-Xcollection-literals", "-Xcontext-sensitive-resolution")
   }
 }
 
